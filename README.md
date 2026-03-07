@@ -1,2 +1,2 @@
 # DocuFill-MCP-Decoupled-Data-Retrieval-Form-Automation
-A lightweight, enterprise-grade proof-of-concept demonstrating how to decouple LLM reasoning from secure data retrieval.
+A lightweight, enterprise-grade proof-of-concept demonstrating how to decouple LLM reasoning from secure data retrieval. This project uses the Model Context Protocol (MCP) and LangGraph to automatically fill parsed document structures (like OCR outputs) by securely querying structured SQL databases and performing RAG on unstructured policy documents, utilizing cost-effective open-source models via OpenRouter.
