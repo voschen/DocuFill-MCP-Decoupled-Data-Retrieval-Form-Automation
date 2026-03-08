@@ -1,5 +1,6 @@
 from langchain_openai import ChatOpenAI
 from langchain_mcp_adapters.client import MultiServerMCPClient
+from langchain_core.messages import SystemMessage, HumanMessage, AIMessage
 from langgraph.graph import StateGraph, END
 from langgraph.graph.message import add_messages
 from typing import Annotated, TypedDict
@@ -44,7 +45,8 @@ class AgentState(TypedDict):
 ############## Lang Graph Workflow ###############
 ##################################################
 
-async def call_model(state: AgentState) -> str:
+# Node 1
+async def should_continue(state: AgentState) -> dict:
     instructions = SystemMessage(content=(
         "You are a Senior Loan Officer at a bank. Your goal is to fill out the "
         "provided JSON sheet using the tools at your disposal. "
@@ -52,6 +54,22 @@ async def call_model(state: AgentState) -> str:
         "2. Second, check bank policies to see if they are eligible. "
         "3. Once you have both, fill the sheet and explain your reasoning."
     ))
+
+    messages = instructions + state["messages"]
+
+    response = await llm_with_tools.ainvoke(instructions)
+
+    return {"messages": [response]} # returns a dictionary, langgraph will take it and add it to the state
+
+
+# Router
+async def router(state: AgentState) -> dict:
+
+    last_message = state["messages"][-1]
+
+    if last_message.tool_calls:
+        return "tools"
+    return END
 
 
 ##################################################
