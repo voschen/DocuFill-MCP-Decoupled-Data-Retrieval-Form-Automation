@@ -1,4 +1,6 @@
-mcp
+fastmcp
 langgraph
 langchain-openai
+langchain-mcp-adapters
 pydantic
+python-dotenv

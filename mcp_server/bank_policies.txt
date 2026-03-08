@@ -1,0 +1,5 @@
+CONFIDENTIAL - BANK LENDING POLICIES 2026
+
+Rule 1: Any client with a risk rating of "High" must be denied a loan, regardless of balance.
+Rule 2: Clients with a "Low" risk rating are automatically approved if their account balance is strictly greater than $5,000.
+Rule 3: If a client has a balance under $5,000, they are denied due to insufficient collateral.
